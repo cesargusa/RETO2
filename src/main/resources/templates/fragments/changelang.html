@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<header>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $("#locales").change(function () {
+	        var selectedOption = $('#locales').val();
+	        if (selectedOption != ''){
+	            window.location.replace('?lang=' + selectedOption);
+	        }
+	    });
+	});
+	</script>
+
+</header>
+<body>
+    <div style="font-family: 'Montserrat', sans-serif;">
+    <span th:text="#{cambiar}"></span>
+<select id="locales" onchange="cambiar()">
+    <option value=""></option>
+    <option value="en" th:text="#{en}"></option>
+    <option value="es" th:text="#{es}"></option>
+</select></div>
+
+<div class="actions-orders">
+	<a th:href="@{http://localhost:6969/orders/new}">
+		<button type="button" class="btn btn-outline-success" th:text="#{addOrder}"></button>
+	</a>
+	<a th:href="@{http://localhost:6969/products}">
+		<button type="button" class="btn btn-outline-success" th:text="#{shop}"></button>
+	</a>
+
+</div>
+</body>
+</html>

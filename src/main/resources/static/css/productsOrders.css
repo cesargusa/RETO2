@@ -1,0 +1,20 @@
+.tabla-orderProduct{
+    width: 60%;
+    margin-left: 10%;
+    text-align: center;
+    float: left;
+}
+
+.productsOrder-buttons button{
+    width: 10%;
+    margin-left: 30%;
+    margin-bottom: 250px;
+}
+#table-orders{
+    width: 60%;
+    margin-left: 10%;
+    background-color: rgb(191, 191, 209);
+    text-align: center;
+
+}
+

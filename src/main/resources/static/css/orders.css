@@ -1,0 +1,17 @@
+*{
+    margin:0;
+    padding: 0;
+ }
+ #table-orders{
+ width:80%;
+ margin-top: 5%;
+ margin-left: 10%;
+ margin-right: 5%;
+ text-align: center;
+ }
+ .actions-orders{
+    width: 80%;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 5%;
+ }
