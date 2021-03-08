@@ -1,6 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
-
+<head>
+    <header th:insert="~{fragments/changelang.html :: header}">
+    </header>
+</head>
 <body>
+    <div th:replace="~{fragments/changelang.html :: body}"></div>
+
    <form th:action="@{/productAdd}" th:object="${product}" method="POST">
         <p>Order ID<input th:field="*{pedidoId}" id="orderID"></p>
         <p>Product ID<input th:field="*{productId}"></p>

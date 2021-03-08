@@ -1,6 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
-
+<head>
+    <header th:insert="~{fragments/changelang.html :: header}">
+    </header>
+</head>
 <body>
+    <div th:replace="~{fragments/changelang.html :: body}"></div>
+
    <form th:action="@{/orderCreate}" th:object="${order}" method="POST">
         <p>Fecha<input th:field="*{fecha}"></p>
         <p>User<input th:field="*{nameUser}"></p>
