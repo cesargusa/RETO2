@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/productsOrders.css}" />
+    <header th:insert="~{fragments/changelang.html :: header}">
+    </header>
+    <title>Document</title>
+</head>
+
+<body>
+    <div th:replace="~{fragments/changelang.html :: body}"></div>
+
+
+    <table th:each="pro : ${productsOrder}" class="table table-striped" id="table-orders">
+
+        <tbody>
+            <tr>
+                <th th:text="*{pro.order.nameUser}"></th>
+                <th th:text="*{pro.order.fecha}"></th>
+                <th th:text="*{pro.order.status}" th:if="*{pro.order.status == 'Cancelado'}" style="color: red;"></th>
+                <th th:text="*{pro.order.status}" th:if="*{pro.order.status == 'Aceptado'}" style="color: green;"></th>
+                <th th:text="*{pro.order.status}" th:if="*{pro.order.status == 'En Entrega'}" style="color: orange;">
+                <th>
+                    <div class="actions-orderProducts">
+                        <a th:href="@{http://localhost:6969/products/add}">
+                            <button type="button" class="btn btn-outline-success" th:text="#{addProduct}"></button>
+                        </a>
+                    </div>
+                </th>
+                </th>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+
+    <div th:each="pro : ${productsOrder}">
+        <th:block th:with="products = ${productsOrder.productList}">
+
+            <table border=1 class="tabla-orderProduct">
+                <tr>
+                    <th>ID</th>
+                    <th th:text="#{nombre}"></th>
+                    <th th:text="#{imagen}"></th>
+                    <th th:text="#{precio}"></th>
+                    <th>CANTIDAD</th>
+                    <th>TOTAL</th>
+                </tr>
+
+                <tr th:each="pro, state : ${products}">
+                    <th th:utext="${pro.product.id}"></th>
+                    <td th:utext="${pro.product.name}"></td>
+                    <td><img th:src="@{*{pro.product.url}}" width="150px"></td>
+                    <td th:utext="${pro.product.price}"><span>€</span></td>
+                    <td th:utext="${pro.cantidad}"></td>
+                    <td th:utext="${pro.cantidad} * ${pro.product.price}"></td>
+
+
+                </tr>
+            </table>
+
+  </th:block>
+    </div>
+    <table>
+        <tbody th:each="pro2 : ${listOrder}" th:object="${pro2}">
+            <tr>
+                <th> <button type="button" class="btn btn-danger btnDelete" th:url="@{|/OrderProduct/*{id}|}" th:extraInfo="*{id}">Eliminar</button>
+                   </th>
+            </tr>
+        </tbody>
+    </table>
+  
+    <div class="productsOrder-buttons">
+        <a href="/orders">
+            <button type="button" class="btn btn-danger">Back</button>
+        </a>
+    </div>
+</body>
+<script>
+     //CODIGO PARA BORRRAR UN PEDIDO//
+     $(document).ready(function(){
+        $(".btnDelete").click(function(){
+            if(confirm("Eliminar?"))
+            {
+                let ID = $(this).attr('extraInfo');
+                let URL = $(this).attr('url');
+                $.ajax({
+                    type:'DELETE',
+                    url:URL,
+                    contentType: 'application/json'
+                }).done(function(data, textStatus,jqXHR){
+                    window.location.reload()
+                });
+            }
+        });
+         });
+</script>
+
+</html>

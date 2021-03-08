@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/orders.css}" />
+    <header th:insert="~{fragments/changelang.html :: header}">
+    </header>
+    <title>Order</title>
+</head>
+
+<body>
+    <div th:replace="~{fragments/changelang.html :: body}"></div>
+   
+    <table class="table table-striped" id="table-orders">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col" th:text="#{usuario}"></th>
+                <th scope="col" th:text="#{fecha}"></th>
+                <th scope="col" th:text="#{estado}"></th>
+                <th scope="col" th:text="#{acciones}"></th>
+
+
+            </tr>
+        </thead>
+        <tbody th:each="ord : ${orders}" th:object="${ord}">
+            <tr>
+                <th th:text="*{id}"></th>
+                <td th:text="*{nameUser}"></td>
+                <td th:text="*{fecha}"></td>
+                <td th:text="*{status}" th:if="*{status == 'Cancelado'}" style="color: red;"></td>
+                <td th:text="*{status}" th:if="*{status == 'Aceptado'}" style="color: green;"></td>
+                <td th:text="*{status}" th:if="*{status == 'En Entrega'}" style="color: orange;"></td>
+                <td>
+                    <a th:href="@{~/orderproducts/}+*{id}">
+                        <button type="button" class="btn btn-primary" th:text="#{ver}"></button>
+                    </a>
+                    <a>
+                        <button type="button" class="btn btn-danger btnDelete" th:url="@{|/ordersAPI/*{id}|}"
+                            th:extraInfo="*{id}" th:text="#{borrar}"></button>
+                    </a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+<script>
+    //CODIGO PARA BORRRAR UN PEDIDO//
+    $(document).ready(function(){
+        $(".btnDelete").click(function(){
+            if(confirm("Eliminar?"))
+            {
+                let ID = $(this).attr('extraInfo');
+                let URL = $(this).attr('url');
+                $.ajax({
+                    type:'DELETE',
+                    url:URL,
+                    contentType: 'application/json'
+                }).done(function(data, textStatus,jqXHR){
+                    window.location = "/orders"
+                });
+            }
+        });
+         });
+   
+</script>
+</html>
