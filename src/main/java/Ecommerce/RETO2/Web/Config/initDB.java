@@ -19,7 +19,7 @@ public class initDB {
             OrderProductRepository repository3) {
         return args -> {
 
-            repository.save(new ProductEntity("Altavoz portátil JBL Flip 5 negro Bluetooth", "99.99",
+          /*   repository.save(new ProductEntity("Altavoz portátil JBL Flip 5 negro Bluetooth", "99.99",
                     "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/201908/29/00138545233363____1__1200x1200.jpg"));
             repository.save(new ProductEntity("Xiaomi Mi 11 5G 8 GB + 256 GB Midnight Gray móvil libre", "799.90",
                     "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202102/25/00157063601736009_7__640x640.jpg"));
@@ -37,7 +37,7 @@ public class initDB {
 
             repository3.save(new OrderProductEntity(1L, 1L, 4));
             repository3.save(new OrderProductEntity(1L, 2L, 3));
-            repository3.save(new OrderProductEntity(4L, 2L, 4));
+            repository3.save(new OrderProductEntity(4L, 2L, 4)); */
 
         };
 
