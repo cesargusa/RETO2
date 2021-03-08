@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/products.css}" />
+    <header th:insert="~{fragments/changelang.html :: header}">
+    </header>
+</head>
+
+<body>
+    <div th:replace="~{fragments/changelang.html :: body}"></div>
+
+    <div class="products-container">
+        <div th:each="pro : ${products}" th:object="${pro}" style="list-style: none;">
+            <div class="product">
+                <div class="products-container-title">
+                    <p th:text="*{name}"></p>
+                </div>
+                <div class="products-container-image">
+                    <img th:src="@{*{url}}">
+                </div>
+                <div class="products-container-price">
+                    <p th:text="*{price} + €"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
