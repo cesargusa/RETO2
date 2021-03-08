@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+   <form th:action="@{/productAdd}" th:object="${product}" method="POST">
+        <p>Order ID<input th:field="*{pedidoId}" id="orderID"></p>
+        <p>Product ID<input th:field="*{productId}"></p>
+        <p>Cantidad <input th:field="*{cantidad}" id="cantidad"></p>
+
+        <p><input type="submit"></p>
+
+        </form>
+    
+</body>
+<script>
+  
+</script>
+</html>
