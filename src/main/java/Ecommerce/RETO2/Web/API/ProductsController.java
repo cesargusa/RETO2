@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Ecommerce.RETO2.Services.ProductsServices;
+import Ecommerce.RETO2.Services.Models.ProductCantidadDTO;
 import Ecommerce.RETO2.Services.Models.ProductDTO;
 
 @RestController
@@ -32,5 +33,24 @@ public class ProductsController {
     @GetMapping("/{id}")
     public List<ProductDTO> GetId(@PathVariable("id") Long id){
         return productsServices.GetById(id);
+    }
+    @PostMapping
+    public ProductDTO AddMovie(@RequestBody ProductDTO product){
+        return productsServices.add(product);
+    }
+    
+    @PutMapping("/{id}")
+    public ProductDTO UpdateMovie(@RequestBody ProductDTO product, @PathVariable("id") Long id){
+        return productsServices.update(id,product);
+    }
+    
+    @DeleteMapping("/{id}")
+    public void DeleteMovie(@PathVariable("id") Long id){
+        productsServices.delete(id);
+
+    }
+    @GetMapping("/cantidad/{id}")
+    public List<ProductCantidadDTO> GetCantidad(@PathVariable("id") Long id){
+        return productsServices.findByOrderProduct(id);
     }
 }

@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import Ecommerce.RETO2.Services.OrderProductServices;
 import Ecommerce.RETO2.Services.OrdersServices;
 import Ecommerce.RETO2.Services.ProductsServices;
 
@@ -21,5 +22,9 @@ public class DI {
     @Bean
     OrdersServices createOrdersService(){
         return new OrdersServices();
+    }
+    @Bean
+    OrderProductServices createPPService(){
+        return new OrderProductServices();
     }
 }

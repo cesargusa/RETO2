@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Ecommerce.RETO2.Repositories.Entities.OrderEntity;
 import Ecommerce.RETO2.Services.OrdersServices;
+import Ecommerce.RETO2.Services.Models.AllOrderDTO;
 import Ecommerce.RETO2.Services.Models.OrderDTO;
 
 @RestController
@@ -30,5 +31,29 @@ public class OrderController {
     @GetMapping("hola/{id}")
     public OrderEntity GetAllmas(@PathVariable("id") Long id){
         return ordersService.findByPedido(id);
+    }
+    @GetMapping("/{id}")
+    public List<OrderDTO> GetId(@PathVariable("id") Long id){
+        return ordersService.GetById(id);
+    }
+    
+    @PostMapping
+    public OrderDTO AddOrder(@RequestBody OrderDTO order){
+        return ordersService.add(order);
+    }
+    
+    @PutMapping("/{id}")
+    public OrderDTO UpdateOrder(@RequestBody OrderDTO order, @PathVariable("id") Long id){
+        return ordersService.update(id,order);
+    }
+    
+    @DeleteMapping("/{id}")
+    public void DeleteOrder(@PathVariable("id") Long id){
+        ordersService.delete(id);
+
+    }
+    @GetMapping("/ordersAll/{id}")
+    public AllOrderDTO GetAllOrders(@PathVariable("id")Long id){
+        return ordersService.createFull(id);
     }
 }
